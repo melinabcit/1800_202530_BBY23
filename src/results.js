@@ -7,67 +7,127 @@ import { collection, addDoc, deleteDoc, doc, getDocs, query, orderBy, limit, Tim
 const personalityCategories = {
   directive: {
     name: "Directive",
-    emoji: "🎯",
-    description: "You enjoy taking charge, organizing activities, and leading teams. You're comfortable making decisions and directing others to achieve goals efficiently."
-  },
-  social: {
-    name: "Social",
-    emoji: "🤝",
-    description: "You thrive on helping others and working collaboratively. You find fulfillment in supporting people, solving their problems, and creating positive relationships."
+    emoji: "🧭",
+    description: "Directive people enjoy taking charge, organizing tasks, and leading others. They like clear goals, planning, and keeping everything on track. They prefer to make decisions quickly and take responsibility for outcomes."
   },
   methodical: {
     name: "Methodical",
     emoji: "📋",
-    description: "You prefer structured environments with clear procedures. You excel at following detailed instructions, maintaining organization, and ensuring consistency in your work."
-  },
-  objective: {
-    name: "Objective",
-    emoji: "🔬",
-    description: "You're analytical and enjoy working with data, science, and technical tasks. You like to understand how things work and solve problems through research and experimentation."
+    description: "Methodical people like structure, step-by-step processes, and predictable environments. They prefer working with rules, instructions, and well-defined tasks. They enjoy accuracy and consistency."
   },
   innovative: {
     name: "Innovative",
     emoji: "💡",
-    description: "You're creative and enjoy exploring new ideas. You like to think outside the box, experiment with different approaches, and discover innovative solutions."
+    description: "Innovative people enjoy exploring new ideas, solving problems creatively, and experimenting. They adapt easily to change and enjoy challenges that require original thinking."
+  },
+  supportive: {
+    name: "Supportive",
+    emoji: "🤝",
+    description: "Supportive people enjoy helping others, working in teams, and making people feel welcome. They enjoy teaching, caring, and service roles."
+  },
+  expressive: {
+    name: "Expressive",
+    emoji: "🎨",
+    description: "Expressive people enjoy communication, creativity, and presenting ideas. They thrive in writing, design, arts, speaking, and inspiring others."
   }
 };
 
 // Question to category mapping (1-indexed to match quiz)
 const questionCategoryMap = {
-  1: "methodical", 2: "objective", 3: "innovative", 4: "methodical", 5: "directive",
-  6: "methodical", 7: "innovative", 8: "directive", 9: "social", 10: "directive",
-  11: "objective", 12: "objective", 13: "methodical", 14: "innovative", 15: "methodical",
-  16: "directive", 17: "directive", 18: "innovative", 19: "objective", 20: "objective",
-  21: "social", 22: "methodical", 23: "social", 24: "objective", 25: "social",
-  26: "objective", 27: "objective", 28: "methodical", 29: "social", 30: "social",
-  31: "objective", 32: "innovative", 33: "directive", 34: "social", 35: "methodical",
-  36: "objective", 37: "objective", 38: "directive", 39: "social", 40: "objective",
-  41: "directive", 42: "directive", 43: "objective", 44: "social", 45: "methodical",
-  46: "social", 47: "innovative", 48: "innovative", 49: "methodical", 50: "objective"
+  1: "methodical", 2: "supportive", 3: "innovative", 4: "methodical", 5: "directive",
+  6: "methodical", 7: "innovative", 8: "directive", 9: "supportive", 10: "directive",
+  11: "expressive", 12: "expressive", 13: "methodical", 14: "innovative", 15: "methodical",
+  16: "directive", 17: "directive", 18: "innovative", 19: "expressive", 20: "expressive",
+  21: "supportive", 22: "methodical", 23: "supportive", 24: "expressive", 25: "supportive",
+  26: "expressive", 27: "expressive", 28: "methodical", 29: "supportive", 30: "supportive",
+  31: "expressive", 32: "innovative", 33: "directive", 34: "supportive", 35: "methodical",
+  36: "expressive", 37: "expressive", 38: "directive", 39: "supportive", 40: "expressive",
+  41: "directive", 42: "directive", 43: "expressive", 44: "supportive", 45: "methodical",
+  46: "supportive", 47: "innovative", 48: "innovative", 49: "methodical", 50: "expressive"
 };
 
 // Occupations database with match criteria
 const occupationsDatabase = [
-  { name: "Acting Teachers", education: "N, C, U", description: "Teach acting techniques and dramatic arts to students at various educational levels.", categories: ["social", "innovative"] },
-  { name: "Chefs", education: "H", description: "Prepare and cook food in restaurants and other food establishments.", categories: ["innovative", "methodical"] },
-  { name: "Curators", education: "U", description: "Manage and care for collections in museums, galleries, and cultural institutions.", categories: ["methodical", "objective"] },
-  { name: "Software Developers", education: "U", description: "Design, develop, and maintain software applications and systems.", categories: ["objective", "innovative"] },
-  { name: "Project Managers", education: "U", description: "Plan, execute, and oversee projects to ensure they are completed on time and within budget.", categories: ["directive", "methodical"] },
-  { name: "Social Workers", education: "U", description: "Help individuals and families cope with problems in their everyday lives.", categories: ["social", "directive"] },
-  { name: "Mechanical Engineers", education: "U", description: "Design, develop, build, and test mechanical devices and systems.", categories: ["objective", "innovative"] },
-  { name: "Teachers (Elementary)", education: "U", description: "Educate young students in elementary schools across various subjects.", categories: ["social", "methodical"] },
-  { name: "Graphic Designers", education: "C, U", description: "Create visual concepts to communicate ideas that inspire and inform consumers.", categories: ["innovative", "objective"] },
-  { name: "Nurses (Registered)", education: "U", description: "Provide and coordinate patient care, educate patients about health conditions.", categories: ["social", "methodical"] },
-  { name: "Financial Analysts", education: "U", description: "Provide guidance to businesses and individuals making investment decisions.", categories: ["objective", "methodical"] },
-  { name: "Marketing Managers", education: "U", description: "Plan and execute marketing strategies to promote products and services.", categories: ["directive", "innovative"] },
-  { name: "Electricians", education: "H, C", description: "Install, maintain, and repair electrical systems in buildings and structures.", categories: ["objective", "methodical"] },
-  { name: "Human Resources Specialists", education: "U", description: "Recruit, screen, interview, and place workers in organizations.", categories: ["social", "directive"] },
-  { name: "Data Scientists", education: "U", description: "Collect, analyze, and interpret large amounts of data to help organizations make decisions.", categories: ["objective", "innovative"] },
-  { name: "Event Planners", education: "C, U", description: "Organize and coordinate events such as meetings, conventions, and parties.", categories: ["directive", "social"] },
-  { name: "Carpenters", education: "H, C", description: "Construct, install, and repair structures and fixtures made from wood and other materials.", categories: ["objective", "methodical"] },
-  { name: "Psychologists", education: "U", description: "Study mental processes and human behavior by observing and recording interactions.", categories: ["social", "objective"] },
-  { name: "Architects", education: "U", description: "Design buildings and other structures, considering both aesthetics and functionality.", categories: ["innovative", "objective"] },
-  { name: "Sales Managers", education: "U", description: "Direct organizations' sales teams and set sales goals and strategies.", categories: ["directive", "social"] }
+  { 
+    name: "Acting Teacher", 
+    education: "N, C, U", 
+    description: "Teaches acting skills to students in schools or studios.",
+    matchPercentage: 99,
+    jobBankUrl: "https://www.jobbank.gc.ca/browsejobs?q=Acting+teacher",
+    categories: ["expressive", "supportive"]
+  },
+  { 
+    name: "Chefs", 
+    education: "H", 
+    description: "Prepare meals, plan menus, and manage kitchen operations.",
+    matchPercentage: 98,
+    jobBankUrl: "https://www.jobbank.gc.ca/browsejobs?q=Chef",
+    categories: ["innovative", "methodical"]
+  },
+  { 
+    name: "Graphic Designer", 
+    education: "C", 
+    description: "Creates visual designs for brands, products, and media.",
+    matchPercentage: 96,
+    jobBankUrl: "https://www.jobbank.gc.ca/browsejobs?q=Graphic+Designer",
+    categories: ["expressive", "innovative"]
+  },
+  { 
+    name: "Web Developer", 
+    education: "C", 
+    description: "Builds websites and applications using code + design.",
+    matchPercentage: 95,
+    jobBankUrl: "https://www.jobbank.gc.ca/browsejobs?q=Web+Developer",
+    categories: ["innovative", "methodical"]
+  },
+  { 
+    name: "Early Childhood Educator Assistant", 
+    education: "C", 
+    description: "Supports children with learning, routines, and play.",
+    matchPercentage: 94,
+    jobBankUrl: "https://www.jobbank.gc.ca/browsejobs?q=Early+Childhood+Educator",
+    categories: ["supportive", "methodical"]
+  },
+  { 
+    name: "Marketing Coordinator", 
+    education: "C, U", 
+    description: "Helps plan campaigns, content, and promotional activities.",
+    matchPercentage: 93,
+    jobBankUrl: "https://www.jobbank.gc.ca/browsejobs?q=Marketing",
+    categories: ["expressive", "directive"]
+  },
+  { 
+    name: "Administrative Assistant", 
+    education: "H, C", 
+    description: "Organizes office tasks, schedules, and communications.",
+    matchPercentage: 91,
+    jobBankUrl: "https://www.jobbank.gc.ca/browsejobs?q=Administrative+Assistant",
+    categories: ["methodical", "supportive"]
+  },
+  { 
+    name: "IT Support Technician", 
+    education: "C", 
+    description: "Fixes computer, network, and software issues.",
+    matchPercentage: 90,
+    jobBankUrl: "https://www.jobbank.gc.ca/browsejobs?q=IT+support",
+    categories: ["methodical", "supportive"]
+  },
+  { 
+    name: "Sales Associate", 
+    education: "N, H", 
+    description: "Helps customers, explains products, and supports sales.",
+    matchPercentage: 89,
+    jobBankUrl: "https://www.jobbank.gc.ca/browsejobs?q=Sales",
+    categories: ["expressive", "supportive"]
+  },
+  { 
+    name: "Community Service Worker", 
+    education: "C", 
+    description: "Supports individuals and families in community programs.",
+    matchPercentage: 88,
+    jobBankUrl: "https://www.jobbank.gc.ca/browsejobs?q=Community+Service+Worker",
+    categories: ["supportive", "directive"]
+  }
 ];
 
 // Calculate category scores from quiz answers
@@ -75,17 +135,17 @@ function calculateCategoryScores() {
   const answers = JSON.parse(localStorage.getItem('careerQuizAnswers') || '{}');
   const categoryScores = {
     directive: 0,
-    social: 0,
+    supportive: 0,
     methodical: 0,
-    objective: 0,
+    expressive: 0,
     innovative: 0
   };
   
   const categoryCounts = {
     directive: 0,
-    social: 0,
+    supportive: 0,
     methodical: 0,
-    objective: 0,
+    expressive: 0,
     innovative: 0
   };
 
@@ -173,16 +233,17 @@ function renderCategories() {
 // Render occupations table
 function renderOccupations(categoryScores) {
   const occupationsBody = document.getElementById('occupationsBody');
-  const matches = calculateOccupationMatches(categoryScores);
   
   occupationsBody.innerHTML = '';
   
-  matches.forEach(occupation => {
+  occupationsDatabase.forEach(occupation => {
     const row = document.createElement('tr');
     row.setAttribute('data-education', occupation.education);
     row.innerHTML = `
       <td class="match-percentage">${occupation.matchPercentage}%</td>
-      <td class="occupation-name">${occupation.name}</td>
+      <td class="occupation-name">
+        <a href="${occupation.jobBankUrl}" target="_blank" rel="noopener noreferrer">${occupation.name}</a>
+      </td>
       <td class="education-level">${occupation.education}</td>
       <td class="occupation-description">${occupation.description}</td>
     `;
@@ -243,12 +304,12 @@ function renderInsights(topCategories) {
     
     if (firstCat === 'directive') {
       insights.push(`Your <strong>Directive</strong> strength indicates you're a natural leader. Consider roles where you can manage teams, organize projects, and make important decisions.`);
-    } else if (firstCat === 'social') {
-      insights.push(`Your <strong>Social</strong> orientation shows you excel at helping others. Look for careers in education, healthcare, counseling, or community services.`);
+    } else if (firstCat === 'supportive') {
+      insights.push(`Your <strong>Supportive</strong> orientation shows you excel at helping others. Look for careers in education, healthcare, counseling, or community services.`);
     } else if (firstCat === 'methodical') {
       insights.push(`Your <strong>Methodical</strong> approach means you thrive in structured environments. Consider careers in administration, quality control, or technical fields with clear procedures.`);
-    } else if (firstCat === 'objective') {
-      insights.push(`Your <strong>Objective</strong> mindset shows you're analytical and detail-oriented. Explore careers in science, technology, engineering, or research.`);
+    } else if (firstCat === 'expressive') {
+      insights.push(`Your <strong>Expressive</strong> mindset shows you're creative and communicative. Explore careers in arts, design, writing, marketing, or public speaking.`);
     } else if (firstCat === 'innovative') {
       insights.push(`Your <strong>Innovative</strong> nature means you enjoy creativity and experimentation. Consider careers in design, development, arts, or entrepreneurship.`);
     }
@@ -261,7 +322,7 @@ function renderInsights(topCategories) {
 
   insights.push(`The occupations listed above align with your personality profile. Higher match percentages indicate stronger alignment with your interests and work preferences.`);
   
-  insights.push(`Education requirements vary by occupation. Some roles offer multiple entry paths (H=High School, C=College, U=University), giving you flexibility in your career journey.`);
+  insights.push(`Education requirements vary by occupation. Some roles offer multiple entry paths (N=No formal education, H=High School, C=College, U=University), giving you flexibility in your career journey.`);
 
   // Render insights
   insightsGrid.innerHTML = '';
