@@ -35,12 +35,25 @@ const firebaseConfig = {
 // Initialize the Firebase app instance.
 // This sets up the Firebase connection for your web app.
 // ---------------------------------------------------------
-const app = initializeApp(firebaseConfig);
+let app;
+let auth;
+let db;
 
-// ---------------------------------------------------------
-// Create and export the Firebase Authentication service.
-// You can import "auth" anywhere to perform login, signup,
-// or signout operations (that's why we export it).
-// ---------------------------------------------------------
-export const auth = getAuth(app);
-export const db = getFirestore(app);
+try {
+  app = initializeApp(firebaseConfig);
+  
+  // ---------------------------------------------------------
+  // Create and export the Firebase Authentication service.
+  // You can import "auth" anywhere to perform login, signup,
+  // or signout operations (that's why we export it).
+  // ---------------------------------------------------------
+  auth = getAuth(app);
+  db = getFirestore(app);
+} catch (error) {
+  console.warn("Firebase initialization failed. Running in offline mode.", error);
+  // Export null values if Firebase fails to initialize
+  auth = null;
+  db = null;
+}
+
+export { auth, db };

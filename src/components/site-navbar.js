@@ -60,18 +60,33 @@ class SiteNavbar extends HTMLElement {
     // Initialize with invisible placeholder to maintain layout space
     authControls.innerHTML = `<div class="btn btn-outline-light" style="visibility: hidden; min-width: 80px;">Log out</div>`;
 
-    onAuthStateChanged(auth, (user) => {
-      let updatedAuthControl;
-      if (user) {
-        updatedAuthControl = `<button class="btn btn-outline-light" id="signOutBtn" type="button" style="min-width: 80px;">Log out</button>`;
-        authControls.innerHTML = updatedAuthControl;
-        const signOutBtn = authControls.querySelector("#signOutBtn");
-        signOutBtn?.addEventListener("click", logoutUser);
-      } else {
-        updatedAuthControl = `<a class="btn btn-outline-light" id="loginBtn" href="/login.html" style="min-width: 80px;">Log in</a>`;
-        authControls.innerHTML = updatedAuthControl;
-      }
-    });
+    // Check if Firebase auth is available
+    if (!auth) {
+      // If Firebase is not configured, show login button as fallback
+      console.warn("Firebase auth not configured. Showing login button.");
+      authControls.innerHTML = `<a class="btn btn-outline-light" id="loginBtn" href="/login.html" style="min-width: 80px;">Log in</a>`;
+      return;
+    }
+
+    // Wrap Firebase auth logic in try-catch to handle runtime errors gracefully
+    try {
+      onAuthStateChanged(auth, (user) => {
+        let updatedAuthControl;
+        if (user) {
+          updatedAuthControl = `<button class="btn btn-outline-light" id="signOutBtn" type="button" style="min-width: 80px;">Log out</button>`;
+          authControls.innerHTML = updatedAuthControl;
+          const signOutBtn = authControls.querySelector("#signOutBtn");
+          signOutBtn?.addEventListener("click", logoutUser);
+        } else {
+          updatedAuthControl = `<a class="btn btn-outline-light" id="loginBtn" href="/login.html" style="min-width: 80px;">Log in</a>`;
+          authControls.innerHTML = updatedAuthControl;
+        }
+      });
+    } catch (error) {
+      // If Firebase encounters an error, show login button as fallback
+      console.warn("Firebase auth error:", error);
+      authControls.innerHTML = `<a class="btn btn-outline-light" id="loginBtn" href="/login.html" style="min-width: 80px;">Log in</a>`;
+    }
   }
 }
 
