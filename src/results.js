@@ -1,4 +1,7 @@
 // Career Quiz Results JavaScript
+import { auth, db } from "/src/firebaseConfig.js";
+import { onAuthStateChanged } from "firebase/auth";
+import { collection, addDoc, deleteDoc, doc, getDocs, query, orderBy, limit, Timestamp } from "firebase/firestore";
 
 // Personality category definitions with emojis
 const personalityCategories = {
@@ -288,7 +291,7 @@ function checkQuizCompletion() {
 }
 
 // Initialize results page
-function initResults() {
+async function initResults() {
   // Check if quiz was completed
   if (!checkQuizCompletion()) {
     return;
@@ -298,7 +301,67 @@ function initResults() {
   const { scores, topCategories } = renderCategories();
   renderOccupations(scores);
   renderInsights(topCategories);
+  
+  // Save results to Firebase if user is logged in
+  await saveResultsToFirebase(scores, topCategories);
 }
+
+// Save quiz results to Firebase (with FIFO queue - keep only 3 most recent)
+async function saveResultsToFirebase(categoryScores, topCategories) {
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      try {
+        // Check if viewing a saved result
+        const viewResultId = localStorage.getItem('viewResultId');
+        if (viewResultId) {
+          // User is viewing a saved result, don't save again
+          localStorage.removeItem('viewResultId');
+          return;
+        }
+        
+        // Prepare result data
+        const resultData = {
+          timestamp: Timestamp.now(),
+          categoryScores: categoryScores,
+          topCategories: topCategories,
+          answers: JSON.parse(localStorage.getItem('careerQuizAnswers') || '{}')
+        };
+        
+        // Reference to user's quiz results collection
+        const resultsRef = collection(db, "users", user.uid, "quizResults");
+        
+        // Add new result
+        await addDoc(resultsRef, resultData);
+        console.log("Quiz result saved successfully!");
+        
+        // Implement FIFO queue: Keep only 3 most recent results
+        const q = query(resultsRef, orderBy("timestamp", "desc"));
+        const querySnapshot = await getDocs(q);
+        
+        // If more than 3 results, delete the oldest ones
+        if (querySnapshot.size > 3) {
+          const resultsArray = [];
+          querySnapshot.forEach((doc) => {
+            resultsArray.push({ id: doc.id, timestamp: doc.data().timestamp });
+          });
+          
+          // Sort by timestamp descending and keep only first 3
+          resultsArray.sort((a, b) => b.timestamp.toMillis() - a.timestamp.toMillis());
+          
+          // Delete results beyond the 3 most recent
+          for (let i = 3; i < resultsArray.length; i++) {
+            await deleteDoc(doc(db, "users", user.uid, "quizResults", resultsArray[i].id));
+            console.log(`Deleted old result: ${resultsArray[i].id}`);
+          }
+        }
+        
+      } catch (error) {
+        console.error("Error saving quiz results:", error);
+      }
+    }
+  });
+}
+
 
 // Initialize when page loads
 document.addEventListener('DOMContentLoaded', initResults);

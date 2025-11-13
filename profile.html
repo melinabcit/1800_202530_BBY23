@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Profile - PathFinder</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/styles/app_home.css" />
+    <link rel="stylesheet" href="src/styles/profile.css" />
+    <!-- Web Components for shared navbar and footer layout -->
+    <script type="module" src="/src/components/app_site-navbar.js"></script>
+    <script type="module" src="/src/components/app_site-footer.js"></script>
+  </head>
+  <body>
+    <!-- our own navbar goes here -->
+    <site-navbar></site-navbar>
+
+    <!-- Main Profile Content -->
+    <div class="profile-container">
+      <div class="profile-header">
+        <h1>Your Profile</h1>
+        <p class="profile-intro" id="profileIntro">
+          View your quiz history and track your career exploration journey.
+        </p>
+      </div>
+
+      <!-- User Info Section -->
+      <section class="user-info-section">
+        <h2>Account Information</h2>
+        <div class="user-info-card" id="userInfoCard">
+          <!-- User info will be dynamically inserted here -->
+        </div>
+      </section>
+
+      <!-- Quiz History Section -->
+      <section class="history-section">
+        <h2>Quiz Result History</h2>
+        <p class="section-description">
+          Your most recent quiz results are saved here (up to 3). Click on any result to view details.
+        </p>
+        
+        <div class="history-grid" id="historyGrid">
+          <!-- History cards will be dynamically inserted here -->
+        </div>
+
+        <div class="no-history" id="noHistory" style="display: none;">
+          <p>You haven't taken any quizzes yet. <a href="quiz.html">Take the quiz now!</a></p>
+        </div>
+      </section>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <a href="quiz.html" class="btn btn-primary">Take Quiz</a>
+        <a href="index.html" class="btn btn-secondary">Back to Home</a>
+      </div>
+    </div>
+
+    <!-- our own footer goes here -->
+    <site-footer></site-footer>
+
+    <!-- Profile JavaScript -->
+    <script type="module" src="/src/profile.js"></script>
+  </body>
+</html>

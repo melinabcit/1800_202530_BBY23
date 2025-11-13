@@ -28,7 +28,7 @@ class SiteNavbar extends HTMLElement {
       <ul class="navbar-menu">
         <li><a href="index.html">Home</a></li>
         <li><a href="quiz.html">Quiz</a></li>
-        <li><a href="results.html">Results</a></li>
+        <li><a href="profile.html">Profile</a></li>
         <li><a href="index.html#careers">Careers</a></li>
         <li><a href="index.html#how">FAQ</a></li>
         <li><a href="index.html#about">About</a></li>
