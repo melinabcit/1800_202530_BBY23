@@ -290,17 +290,8 @@ function submitQuiz() {
 
 // Calculate quiz results
 function calculateResults() {
-  // For now, just show a simple completion message
-  // In a full implementation, this would calculate scores for each category
-  // (directive, social, methodical, objective, innovative)
-  
-  const totalScore = Object.values(answers).reduce((sum, value) => sum + value, 0);
-  const avgScore = (totalScore / 50).toFixed(2);
-  
-  alert(`Quiz completed!\n\nYou answered all 50 questions.\nYour average interest level: ${avgScore}/5.0\n\nResults calculation would be implemented here to show your career preferences across the five categories: directive, social, methodical, objective, and innovative work.`);
-  
-  // Optionally, redirect to a results page
-  // window.location.href = 'quiz-results.html';
+  // Redirect to results page
+  window.location.href = 'results.html';
 }
 
 // Delete all answers
