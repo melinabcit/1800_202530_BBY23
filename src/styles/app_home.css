@@ -4,14 +4,19 @@
   --pill-bg: #e6e6e6;
   --bottombar-bg: #3b3b3b;
   --accent: #000;
+  --primary-color: #4a90e2;
+  --secondary-color: #7b68ee;
 }
+
 * {
   box-sizing: border-box;
 }
+
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto,
@@ -20,83 +25,95 @@ body {
   color: var(--accent);
 }
 
-/* Top bar */
-.topbar {
-  background: var(--topbar-bg);
-  padding: 12px 14px 18px 14px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+/* Navbar - Modern horizontal layout */
+.navbar {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 100;
 }
 
-.topbar-inner {
+.navbar-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
 }
 
-/* icon images inside header and bottom bar */
-.icon {
-  width: 28px;
-  height: auto;
-  display: block;
-  flex: 0 0 auto;
-}
-.menu-icon,
-.profile-icon,
-.left-icon,
-.right-icon {
-  opacity: 0.95;
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: white;
 }
 
-.search {
-  border: 0;
-  outline: none;
-  font-size: 16px;
-  margin-left: 8px;
-  width: 90%;
+.brand-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
 }
 
-/* Buttons: make outline-light variants appear as solid black with white text */
-.btn.btn-outline-light,
-.topbar .btn.btn-outline-light{
-  padding: 6px 1px;
+.brand-text {
+  font-family: "Pacifico", cursive;
+  font-size: 24px;
+  font-weight: 400;
+  color: white;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-menu {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+
+.navbar-menu li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.navbar-menu li a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.auth-controls {
+  display: flex;
+  align-items: center;
+}
+
+.btn-auth {
+  background: white;
+  color: var(--primary-color);
   border: none;
-}
-
-.auth-controls .btn,
-.auth-controls a.btn {
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  padding: 6px 10px;
+  padding: 0.5rem 1.5rem;
   border-radius: 6px;
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn.btn-outline-light:hover,
-.auth-controls .btn:hover,
-.auth-controls a.btn:hover {
-  filter: brightness(0.9);
-}
-
-/* Brand title */
-.brand {
-  font-family: "Pacifico", cursive;
-  font-size: 36px;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  min-width: 80px;
   text-align: center;
-  margin: 18px 45% 0;
-  font-weight: 400;
-  transform: translateY(-40px);
-  /* place the brand in front of the topbar while keeping it visually in the same place */
-  position: fixed;
-  z-index: 25;
-  pointer-events: none;
-  color: var(--accent);
+}
+
+.btn-auth:hover {
+  background: rgba(255, 255, 255, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* Bottom navigation */
@@ -139,21 +156,46 @@ body {
 }
 
 /* Make layout responsive for small widths */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .brand-text {
+    font-size: 20px;
+  }
+
+  .navbar-menu {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .navbar-menu li a {
+    font-size: 13px;
+    padding: 0.4rem 0.7rem;
+  }
+}
+
 @media (max-width: 420px) {
-  .brand {
-    font-size: 30px;
+  .brand-logo {
+    width: 32px;
+    height: 32px;
   }
-  .search {
-    font-size: 14px;
+
+  .brand-text {
+    font-size: 18px;
   }
-  .icon {
-    width: 22px;
+
+  .navbar-menu li a {
+    font-size: 12px;
+    padding: 0.3rem 0.5rem;
   }
-  .home-pill {
-    width: 80px;
-    height: 54px;
-  }
-  .home-button {
-    width: clamp(24px, 10vw, 36px);
+
+  .btn-auth {
+    font-size: 12px;
+    padding: 0.4rem 1rem;
   }
 }
