@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Habit Tracker - PathFinder</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/styles/app_home.css" />
+    <link rel="stylesheet" href="src/styles/habit-tracker.css" />
+    <!-- Web Components for shared navbar and footer layout -->
+    <script type="module" src="/src/components/app_site-navbar.js"></script>
+    <script type="module" src="/src/components/app_site-footer.js"></script>
+  </head>
+  <body>
+    <!-- our own navbar goes here -->
+    <site-navbar></site-navbar>
+
+    <!-- Main Habit Tracker Content -->
+    <div class="habit-tracker-container">
+      <div class="tracker-header">
+        <h1>Weekly Habit Tracker</h1>
+        <p class="tracker-intro">
+          Build career-ready habits one week at a time. Track your progress and stay consistent on your journey to success.
+        </p>
+      </div>
+
+      <!-- Habits Section -->
+      <section class="habits-section">
+        <div class="habits-header">
+          <h2>📅 Weekly Habits for Career Growth</h2>
+          <button id="resetBtn" class="btn-reset">🔄 Reset Week</button>
+        </div>
+
+        <div class="habits-list" id="habitsList">
+          <!-- Habits will be dynamically inserted here -->
+        </div>
+
+        <div class="progress-summary" id="progressSummary">
+          <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+          <p class="progress-text" id="progressText">0 of 7 habits completed (0%)</p>
+        </div>
+      </section>
+
+      <!-- Motivation Section -->
+      <section class="motivation-section">
+        <h3>💪 Stay Motivated</h3>
+        <p id="motivationMessage">
+          Small steps lead to big achievements. Every habit you complete brings you closer to your career goals!
+        </p>
+      </section>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <a href="results.html" class="btn btn-secondary">View Results</a>
+        <a href="quiz.html" class="btn btn-primary">Take Quiz</a>
+      </div>
+    </div>
+
+    <!-- our own footer goes here -->
+    <site-footer></site-footer>
+
+    <!-- Habit Tracker JavaScript -->
+    <script type="module" src="/src/habit-tracker.js"></script>
+  </body>
+</html>

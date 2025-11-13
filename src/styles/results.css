@@ -196,6 +196,17 @@
   color: #2c3e50;
 }
 
+.occupation-name a {
+  color: #2c3e50;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.occupation-name a:hover {
+  color: #667eea;
+  text-decoration: underline;
+}
+
 .education-level {
   font-size: 14px;
   color: #666;
@@ -275,6 +286,79 @@
   flex-wrap: wrap;
 }
 
+/* BCIT Programs Section */
+.bcit-programs-section {
+  margin-bottom: 50px;
+}
+
+.bcit-programs-section h2 {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 15px;
+  border-bottom: 3px solid #667eea;
+  padding-bottom: 10px;
+}
+
+.programs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.program-category {
+  padding: 25px;
+  background: linear-gradient(135deg, #fff5e6 0%, #ffe6cc 100%);
+  border-radius: 12px;
+  border-left: 5px solid #ff9800;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.program-category:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.program-category h3 {
+  font-size: 20px;
+  color: #2c3e50;
+  margin-bottom: 20px;
+  margin-top: 0;
+}
+
+.program-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.program-list li {
+  margin-bottom: 15px;
+}
+
+.program-list li:last-child {
+  margin-bottom: 0;
+}
+
+.program-list a {
+  color: #667eea;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: rgba(102, 126, 234, 0.1);
+}
+
+.program-list a:hover {
+  background: rgba(102, 126, 234, 0.2);
+  transform: translateX(5px);
+  text-decoration: underline;
+}
+
 .btn {
   padding: 14px 32px;
   border: none;
@@ -325,11 +409,13 @@
 
   .personality-section h2,
   .occupations-section h2,
-  .insights-section h2 {
+  .insights-section h2,
+  .bcit-programs-section h2 {
     font-size: 22px;
   }
 
-  .categories-grid {
+  .categories-grid,
+  .programs-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }

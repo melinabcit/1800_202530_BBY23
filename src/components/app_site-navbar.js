@@ -29,6 +29,7 @@ class SiteNavbar extends HTMLElement {
         <li><a href="index.html">Home</a></li>
         <li><a href="quiz.html">Quiz</a></li>
         <li><a href="profile.html">Profile</a></li>
+        <li><a href="habit-tracker.html">Habit Tracker</a></li>
         <li><a href="index.html#careers">Careers</a></li>
         <li><a href="index.html#how">FAQ</a></li>
         <li><a href="index.html#about">About</a></li>
