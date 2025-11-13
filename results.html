@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quiz Results - PathFinder</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/styles/app_home.css" />
+    <link rel="stylesheet" href="src/styles/results.css" />
+    <!-- Web Components for shared navbar and footer layout -->
+    <script type="module" src="/src/components/app_site-navbar.js"></script>
+    <script type="module" src="/src/components/app_site-footer.js"></script>
+  </head>
+  <body>
+    <!-- our own navbar goes here -->
+    <site-navbar></site-navbar>
+
+    <!-- Main Results Content -->
+    <div class="results-container">
+      <div class="results-header">
+        <h1>Your Career Quiz Results</h1>
+        <p class="results-intro">
+          Based on your responses, we've identified your top personality categories and matching occupations.
+        </p>
+      </div>
+
+      <!-- Personality Categories Section -->
+      <section class="personality-section">
+        <h2>Your Personality Categories</h2>
+        <p class="section-description">
+          These categories reflect your work preferences and interests based on your quiz responses.
+        </p>
+        
+        <div class="categories-grid" id="categoriesGrid">
+          <!-- Categories will be dynamically inserted here -->
+        </div>
+      </section>
+
+      <!-- Top Occupations Section -->
+      <section class="occupations-section">
+        <h2>Occupations Matching Your Abilities</h2>
+        
+        <div class="education-filters">
+          <button class="filter-btn active" data-filter="all">Any level</button>
+          <button class="filter-btn" data-filter="N,H">High school</button>
+          <button class="filter-btn" data-filter="C">College</button>
+          <button class="filter-btn" data-filter="U">University</button>
+        </div>
+
+        <div class="occupations-table-container">
+          <table class="occupations-table" id="occupationsTable">
+            <thead>
+              <tr>
+                <th>Match</th>
+                <th>Occupation</th>
+                <th>Education</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody id="occupationsBody">
+              <!-- Occupations will be dynamically inserted here -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Career Insights Section -->
+      <section class="insights-section">
+        <h2>Career Insights</h2>
+        <div class="insights-grid" id="insightsGrid">
+          <!-- Insights will be dynamically inserted here -->
+        </div>
+        
+        <div class="next-steps">
+          <h3>📌 Recommended Next Steps</h3>
+          <p id="nextSteps">
+            <!-- Next steps will be dynamically inserted here -->
+          </p>
+        </div>
+      </section>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <a href="quiz.html" class="btn btn-secondary">Retake Quiz</a>
+        <a href="index.html" class="btn btn-primary">Back to Home</a>
+      </div>
+    </div>
+
+    <!-- our own footer goes here -->
+    <site-footer></site-footer>
+
+    <!-- Results JavaScript -->
+    <script type="module" src="/src/results.js"></script>
+  </body>
+</html>
