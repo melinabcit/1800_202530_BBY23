@@ -78,7 +78,8 @@ const quizData = [
 ];
 
 // Quiz state
-let currentQuestion = 0;
+// Start at -1 to show intro screen first, then move to 0 (Question 1) on first "Next" click
+let currentQuestion = -1;
 let answers = {};
 
 // Initialize quiz
@@ -99,6 +100,11 @@ function initQuiz() {
 function renderQuestion() {
   const questionsContainer = document.getElementById('quizQuestions');
   questionsContainer.innerHTML = '';
+  
+  // On intro screen (currentQuestion === -1), show nothing in questions container
+  if (currentQuestion === -1) {
+    return;
+  }
   
   const questionData = quizData[currentQuestion];
   const questionDiv = createQuestionElement(questionData, currentQuestion);
@@ -186,6 +192,15 @@ function updateNavigation() {
   const nextBtn = document.getElementById('nextBtn');
   const submitBtn = document.getElementById('submitBtn');
   
+  // On intro screen (currentQuestion === -1)
+  if (currentQuestion === -1) {
+    prevBtn.style.display = 'none';
+    nextBtn.style.display = 'inline-block';
+    submitBtn.style.display = 'none';
+    nextBtn.disabled = false; // Always enabled on intro screen
+    return;
+  }
+  
   // Show/hide previous button
   if (currentQuestion === 0) {
     prevBtn.style.display = 'none';
@@ -255,7 +270,7 @@ function deleteAllAnswers() {
   if (confirm('Are you sure you want to delete all your answers? This action cannot be undone.')) {
     answers = {};
     localStorage.removeItem('careerQuizAnswers');
-    currentQuestion = 0;
+    currentQuestion = -1; // Reset to intro screen
     renderQuestion();
     updateProgress();
     updateNavigation();
