@@ -10,7 +10,7 @@ Developed for the COMP 1800 course, this project applies User-Centred Design pra
 
 ## Features
 
-- Take a comprehensive 50-question career assessment quiz
+- Take a comprehensive 8-question career assessment quiz
 - Receive personalized results based on five personality categories (Directive, Methodical, Innovative, Supportive, Expressive)
 - View matching occupations filtered by education level requirements
 - Get BCIT program recommendations tailored to matching careers
@@ -33,9 +33,9 @@ Developed for the COMP 1800 course, this project applies User-Centred Design pra
 
 ## Usage
 
-1. Open your browser and visit `http://localhost:3000` (or run with `npm run dev`).
+1. Open your browser and visit `http://localhost:5173` (or run with `npm run dev`).
 2. Create an account or log in to access the application.
-3. Navigate to the Quiz page to take the 50-question career assessment.
+3. Navigate to the Quiz page to take the 8-question career assessment.
 4. Answer all questions honestly based on your interests and work preferences.
 5. Submit the quiz to view your personalized results, including:
    - Your personality category breakdown
