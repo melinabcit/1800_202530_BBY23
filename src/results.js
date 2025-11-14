@@ -3,48 +3,145 @@ import { auth, db } from "/src/firebaseConfig.js";
 import { onAuthStateChanged } from "firebase/auth";
 import { collection, addDoc, deleteDoc, doc, getDocs, query, orderBy, limit, Timestamp } from "firebase/firestore";
 
-// Personality category definitions with emojis
+// Personality category definitions with emojis and improved result text
 const personalityCategories = {
   directive: {
     name: "Directive",
     emoji: "🧭",
-    description: "Directive people enjoy taking charge, organizing tasks, and leading others. They like clear goals, planning, and keeping everything on track. They prefer to make decisions quickly and take responsibility for outcomes."
+    description: "You chose many answers about leading, organizing, and making decisions. This suggests you have a Directive style. You enjoy taking charge, setting goals, and keeping things on track. You're comfortable being responsible and guiding others.",
+    careers: [
+      "Project Coordinator",
+      "Human Resources Assistant",
+      "Hospitality Supervisor",
+      "Marketing Coordinator",
+      "Aviation Operations Specialist"
+    ]
   },
   methodical: {
     name: "Methodical",
     emoji: "📋",
-    description: "Methodical people like structure, step-by-step processes, and predictable environments. They prefer working with rules, instructions, and well-defined tasks. They enjoy accuracy and consistency."
+    description: "You chose many answers about structure, checklists, and clear steps. This suggests you have a Methodical style. You like predictable systems, detailed instructions, and finishing tasks one by one. Accuracy and consistency matter to you.",
+    careers: [
+      "Administrative Assistant",
+      "Accounting Assistant",
+      "Data Analyst",
+      "Medical Laboratory Assistant",
+      "Pharmacy Technician"
+    ]
   },
   innovative: {
     name: "Innovative",
     emoji: "💡",
-    description: "Innovative people enjoy exploring new ideas, solving problems creatively, and experimenting. They adapt easily to change and enjoy challenges that require original thinking."
+    description: "You chose many answers about changing things, experimenting, and creativity. This suggests you have an Innovative style. You enjoy solving problems in new ways and working with ideas, technology, or design. You adapt well to change and enjoy challenges.",
+    careers: [
+      "Web Developer / Software Developer",
+      "UX/UI Designer",
+      "Graphic Designer",
+      "Industrial Designer",
+      "Data Analyst"
+    ]
   },
   supportive: {
     name: "Supportive",
     emoji: "🤝",
-    description: "Supportive people enjoy helping others, working in teams, and making people feel welcome. They enjoy teaching, caring, and service roles."
+    description: "You chose many answers about helping others, supporting people, and caring about feelings. This suggests you have a Supportive style. You like roles where you can listen, encourage, teach, or care for others. Teamwork and human connection are important to you.",
+    careers: [
+      "Early Childhood Educator Assistant",
+      "Community Service Worker",
+      "Health Care Assistant",
+      "Social Services Worker",
+      "Customer Support Specialist"
+    ]
   },
   expressive: {
     name: "Expressive",
     emoji: "🎨",
-    description: "Expressive people enjoy communication, creativity, and presenting ideas. They thrive in writing, design, arts, speaking, and inspiring others."
+    description: "You chose many answers about sharing ideas, creativity, and communication. This suggests you have an Expressive style. You enjoy presenting, telling stories, designing, or performing. You often bring energy and personality into your work.",
+    careers: [
+      "Acting Teacher",
+      "Social Media Manager",
+      "Broadcast Journalist",
+      "Graphic Designer",
+      "Marketing Coordinator"
+    ]
   }
 };
 
-// Question to category mapping (1-indexed to match quiz)
-const questionCategoryMap = {
-  1: "methodical", 2: "supportive", 3: "innovative", 4: "methodical", 5: "directive",
-  6: "methodical", 7: "innovative", 8: "directive", 9: "supportive", 10: "directive",
-  11: "expressive", 12: "expressive", 13: "methodical", 14: "innovative", 15: "methodical",
-  16: "directive", 17: "directive", 18: "innovative", 19: "expressive", 20: "expressive",
-  21: "supportive", 22: "methodical", 23: "supportive", 24: "expressive", 25: "supportive",
-  26: "expressive", 27: "expressive", 28: "methodical", 29: "supportive", 30: "supportive",
-  31: "expressive", 32: "innovative", 33: "directive", 34: "supportive", 35: "methodical",
-  36: "expressive", 37: "expressive", 38: "directive", 39: "supportive", 40: "expressive",
-  41: "directive", 42: "directive", 43: "expressive", 44: "supportive", 45: "methodical",
-  46: "supportive", 47: "innovative", 48: "innovative", 49: "methodical", 50: "expressive"
-};
+// Quiz questions data (matching quiz.js)
+const quizData = [
+  {
+    question: "When you start a new task, what do you usually care about most?",
+    options: [
+      { text: "Getting everyone organized and moving in the same direction", type: "directive" },
+      { text: "Having clear steps and instructions", type: "methodical" },
+      { text: "Finding a new or better way to do it", type: "innovative" },
+      { text: "Making sure people feel supported and comfortable", type: "supportive" }
+    ]
+  },
+  {
+    question: "A friend asks you for help on a project. What do you enjoy doing most?",
+    options: [
+      { text: "Taking the lead and assigning roles", type: "directive" },
+      { text: "Making a checklist and timeline", type: "methodical" },
+      { text: "Brainstorming creative or unusual ideas", type: "innovative" },
+      { text: "Listening, encouraging, and keeping them calm", type: "supportive" }
+    ]
+  },
+  {
+    question: "How do you like to share your ideas?",
+    options: [
+      { text: "Presenting them clearly in a meeting or group", type: "directive" },
+      { text: "Writing them out in a detailed document", type: "methodical" },
+      { text: "Showing a sketch, mockup, or demo", type: "innovative" },
+      { text: "Telling a story, using humor, or making it inspiring", type: "expressive" }
+    ]
+  },
+  {
+    question: "You learn best when:",
+    options: [
+      { text: "You can try leading or managing real situations", type: "directive" },
+      { text: "You can follow examples and practice step-by-step", type: "methodical" },
+      { text: "You can explore, experiment, and ask 'what if?'", type: "innovative" },
+      { text: "You can discuss with others or explain it to someone else", type: "expressive" }
+    ]
+  },
+  {
+    question: "Which sounds the most satisfying?",
+    options: [
+      { text: "Organizing a team to hit a deadline", type: "directive" },
+      { text: "Setting up a system that runs smoothly", type: "methodical" },
+      { text: "Designing something new from scratch", type: "innovative" },
+      { text: "Helping someone feel more confident or understood", type: "supportive,expressive" }
+    ]
+  },
+  {
+    question: "In a group project, you usually:",
+    options: [
+      { text: "Naturally step into the leader role", type: "directive" },
+      { text: "Keep track of tasks, due dates, and details", type: "methodical" },
+      { text: "Suggest new tools, layouts, or creative approaches", type: "innovative" },
+      { text: "Check in on teammates and help if they're stuck", type: "supportive" }
+    ]
+  },
+  {
+    question: "Which type of work makes you tired the fastest?",
+    options: [
+      { text: "Work where no one listens and there's no leadership", type: "directive" },
+      { text: "Work that's chaotic and disorganized", type: "methodical" },
+      { text: "Repeating the same thing with no room for new ideas", type: "innovative" },
+      { text: "Work where you can't connect with people at all", type: "supportive,expressive" }
+    ]
+  },
+  {
+    question: "On a dream workday, you would mostly:",
+    options: [
+      { text: "Run a project, make decisions, and keep things moving", type: "directive" },
+      { text: "Organize data, files, or systems so everything is clear", type: "methodical" },
+      { text: "Design, code, write, or invent something creative", type: "innovative,expressive" },
+      { text: "Teach, mentor, help clients, or support kids/people", type: "supportive" }
+    ]
+  }
+];
 
 // Occupations database with match criteria
 const occupationsDatabase = [
@@ -140,39 +237,32 @@ function calculateCategoryScores() {
     expressive: 0,
     innovative: 0
   };
-  
-  const categoryCounts = {
-    directive: 0,
-    supportive: 0,
-    methodical: 0,
-    expressive: 0,
-    innovative: 0
-  };
 
-  // Sum scores for each category
-  for (let i = 0; i < 50; i++) {
-    const questionNum = i;
-    const category = questionCategoryMap[questionNum + 1];
-    const answer = answers[questionNum];
-    
-    if (answer && category) {
-      categoryScores[category] += answer;
-      categoryCounts[category]++;
+  // Process each answer
+  for (let i = 0; i < quizData.length; i++) {
+    const answerIndex = answers[i];
+    if (answerIndex !== undefined && quizData[i].options[answerIndex]) {
+      const selectedOption = quizData[i].options[answerIndex];
+      const types = selectedOption.type.split(',');
+      
+      // Add score for each type (multiple types can be scored)
+      types.forEach(type => {
+        type = type.trim();
+        if (categoryScores.hasOwnProperty(type)) {
+          categoryScores[type]++;
+        }
+      });
     }
   }
 
-  // Calculate average scores (normalized to percentage)
-  const averageScores = {};
+  // Convert counts to percentages based on maximum possible score
+  const maxScore = quizData.length;
+  const percentageScores = {};
   for (const category in categoryScores) {
-    if (categoryCounts[category] > 0) {
-      // Average score out of 5, converted to percentage
-      averageScores[category] = Math.round((categoryScores[category] / (categoryCounts[category] * 5)) * 100);
-    } else {
-      averageScores[category] = 0;
-    }
+    percentageScores[category] = Math.round((categoryScores[category] / maxScore) * 100);
   }
 
-  return averageScores;
+  return percentageScores;
 }
 
 // Get top categories sorted by score
@@ -216,6 +306,8 @@ function renderCategories() {
   
   topCategories.forEach(([categoryKey, score]) => {
     const category = personalityCategories[categoryKey];
+    const careersHtml = category.careers.map(career => `<li>${career}</li>`).join('');
+    
     const card = document.createElement('div');
     card.className = 'category-card';
     card.innerHTML = `
@@ -223,6 +315,12 @@ function renderCategories() {
       <h3>${category.name}</h3>
       <div class="category-score">${score}% Match</div>
       <p>${category.description}</p>
+      <div style="margin-top: 15px;">
+        <strong>Careers that often match this style include:</strong>
+        <ul style="text-align: left; margin-top: 8px;">
+          ${careersHtml}
+        </ul>
+      </div>
     `;
     categoriesGrid.appendChild(card);
   });
@@ -343,7 +441,8 @@ function renderInsights(topCategories) {
 // Check if quiz has been completed
 function checkQuizCompletion() {
   const answers = JSON.parse(localStorage.getItem('careerQuizAnswers') || '{}');
-  if (Object.keys(answers).length < 50) {
+  const requiredQuestions = quizData.length; // 8 questions
+  if (Object.keys(answers).length < requiredQuestions) {
     // Redirect to quiz if not completed
     window.location.href = 'quiz.html';
     return false;
