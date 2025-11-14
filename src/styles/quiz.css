@@ -74,19 +74,66 @@
 
 .question-item {
   margin-bottom: 35px;
-  padding: 20px;
+  padding: 25px;
   background: #f9f9f9;
   border-radius: 8px;
   border-left: 4px solid #4CAF50;
 }
 
 .question-text {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   color: #333;
+  line-height: 1.5;
 }
 
+.question-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 15px;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.option-item:hover {
+  border-color: #4CAF50;
+  background-color: #f0f8f0;
+}
+
+.option-item input[type="radio"] {
+  margin: 0;
+  margin-right: 12px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.option-item label {
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #333;
+  flex: 1;
+  margin: 0;
+}
+
+.option-item input[type="radio"]:checked + label {
+  font-weight: 600;
+  color: #2e7d32;
+}
+
+/* Old rating scale styles - keeping for compatibility */
 .rating-scale {
   display: flex;
   justify-content: space-between;
@@ -277,6 +324,18 @@
   .quiz-stats {
     flex-direction: column;
     gap: 10px;
+  }
+
+  .question-text {
+    font-size: 16px;
+  }
+
+  .option-item {
+    padding: 12px;
+  }
+
+  .option-item label {
+    font-size: 14px;
   }
 
   .rating-scale {

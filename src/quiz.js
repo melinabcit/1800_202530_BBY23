@@ -1,177 +1,152 @@
 // Career Quiz JavaScript
 
-// All 50 quiz questions organized by page
+// Quiz questions with multiple choice options
+// Each option maps to a personality type: directive, methodical, innovative, supportive, expressive
 const quizData = [
-  // Page 1 (Questions 1-10)
-  [
-    "Doing the same task for a long period of time.",
-    "Building things and/or repairing them.",
-    "Exploring a subject from different points of view.",
-    "Finishing one job before you start the next.",
-    "Directing people in their activities.",
-    "Maintaining a steady pace throughout an activity.",
-    "Doing trial runs and applying changes.",
-    "Being responsible for organizing an activity and planning something for everyone to do.",
-    "Helping people solve their problems.",
-    "Being responsible for a project or activity and have to look after many different details to complete it."
-  ],
-  // Page 2 (Questions 11-20)
-  [
-    "Learning about scientific topics by reading books, watching TV shows or visiting websites.",
-    "Working with tools and machinery.",
-    "Working according to prescribed methods.",
-    "Solving your own problems and do projects using your own ideas.",
-    "Doing a project or other job carefully, one step at a time.",
-    "Planning the tasks or activities of others.",
-    "Taking charge of things and get them done.",
-    "Trying new ways of doing things.",
-    "Spending your days working with machines or equipment.",
-    "Maintaining equipment or machinery."
-  ],
-  // Page 3 (Questions 21-30)
-  [
-    "Working in the field of community services.",
-    "Doing activities where you always know what is expected of you.",
-    "Speaking with people and listening to them.",
-    "Calculating to solve a problem.",
-    "Helping people improve their lives.",
-    "Working with your hands, doing things such as plumbing repairs, sewing, fixing cars, or wallpapering.",
-    "Discovering how things are made and work through reading books, watching television or searching on websites.",
-    "Doing an activity where your work is closely checked regularly.",
-    "Assisting people when they are sick or in trouble.",
-    "Working in a team."
-  ],
-  // Page 4 (Questions 31-40)
-  [
-    "Working with materials such as wood, stone, clay, fabric or metal.",
-    "Thinking to invent or create.",
-    "Leading a committee, an association or a team.",
-    "Bringing comfort to others.",
-    "Working by following well-established procedures.",
-    "Working with tools, equipment or technical instruments.",
-    "Having a job in which you are working with machines or things rather than dealing with people.",
-    "Being in control of a group rather than just a member.",
-    "Cooperating with others.",
-    "Working on research projects."
-  ],
-  // Page 5 (Questions 41-50)
-  [
-    "Taking responsibility for decisions.",
-    "Getting people to do what you want.",
-    "Going through evidence to solve problems.",
-    "Looking after people.",
-    "Doing an activity where you are told what to do and how.",
-    "Discussing with people to know their opinions.",
-    "Organizing your tasks in your own way.",
-    "Working to discover new ideas or things.",
-    "Working on one thing at a time.",
-    "Doing hobbies on your own, such as building models, gardening, refinishing old furniture, etc."
-  ]
-];
-
-// Rating options
-const ratingOptions = [
-  { value: 1, label: "Not interested at all" },
-  { value: 2, label: "Slightly interested" },
-  { value: 3, label: "Moderately interested" },
-  { value: 4, label: "Very interested" },
-  { value: 5, label: "Extremely interested" }
+  {
+    question: "When you start a new task, what do you usually care about most?",
+    options: [
+      { text: "Getting everyone organized and moving in the same direction", type: "directive" },
+      { text: "Having clear steps and instructions", type: "methodical" },
+      { text: "Finding a new or better way to do it", type: "innovative" },
+      { text: "Making sure people feel supported and comfortable", type: "supportive" }
+    ]
+  },
+  {
+    question: "A friend asks you for help on a project. What do you enjoy doing most?",
+    options: [
+      { text: "Taking the lead and assigning roles", type: "directive" },
+      { text: "Making a checklist and timeline", type: "methodical" },
+      { text: "Brainstorming creative or unusual ideas", type: "innovative" },
+      { text: "Listening, encouraging, and keeping them calm", type: "supportive" }
+    ]
+  },
+  {
+    question: "How do you like to share your ideas?",
+    options: [
+      { text: "Presenting them clearly in a meeting or group", type: "directive" },
+      { text: "Writing them out in a detailed document", type: "methodical" },
+      { text: "Showing a sketch, mockup, or demo", type: "innovative" },
+      { text: "Telling a story, using humor, or making it inspiring", type: "expressive" }
+    ]
+  },
+  {
+    question: "You learn best when:",
+    options: [
+      { text: "You can try leading or managing real situations", type: "directive" },
+      { text: "You can follow examples and practice step-by-step", type: "methodical" },
+      { text: "You can explore, experiment, and ask 'what if?'", type: "innovative" },
+      { text: "You can discuss with others or explain it to someone else", type: "expressive" }
+    ]
+  },
+  {
+    question: "Which sounds the most satisfying?",
+    options: [
+      { text: "Organizing a team to hit a deadline", type: "directive" },
+      { text: "Setting up a system that runs smoothly", type: "methodical" },
+      { text: "Designing something new from scratch", type: "innovative" },
+      { text: "Helping someone feel more confident or understood", type: "supportive,expressive" }
+    ]
+  },
+  {
+    question: "In a group project, you usually:",
+    options: [
+      { text: "Naturally step into the leader role", type: "directive" },
+      { text: "Keep track of tasks, due dates, and details", type: "methodical" },
+      { text: "Suggest new tools, layouts, or creative approaches", type: "innovative" },
+      { text: "Check in on teammates and help if they're stuck", type: "supportive" }
+    ]
+  },
+  {
+    question: "Which type of work makes you tired the fastest?",
+    options: [
+      { text: "Work where no one listens and there's no leadership", type: "directive" },
+      { text: "Work that's chaotic and disorganized", type: "methodical" },
+      { text: "Repeating the same thing with no room for new ideas", type: "innovative" },
+      { text: "Work where you can't connect with people at all", type: "supportive,expressive" }
+    ]
+  },
+  {
+    question: "On a dream workday, you would mostly:",
+    options: [
+      { text: "Run a project, make decisions, and keep things moving", type: "directive" },
+      { text: "Organize data, files, or systems so everything is clear", type: "methodical" },
+      { text: "Design, code, write, or invent something creative", type: "innovative,expressive" },
+      { text: "Teach, mentor, help clients, or support kids/people", type: "supportive" }
+    ]
+  }
 ];
 
 // Quiz state
-let currentPage = 0;
+let currentQuestion = 0;
 let answers = {};
 
 // Initialize quiz
 function initQuiz() {
   loadAnswers();
-  renderQuestions();
+  renderQuestion();
   updateProgress();
   updateNavigation();
-  updatePageIndicator();
   
   // Add event listeners
-  document.getElementById('nextBtn').addEventListener('click', nextPage);
-  document.getElementById('prevBtn').addEventListener('click', prevPage);
+  document.getElementById('nextBtn').addEventListener('click', nextQuestion);
+  document.getElementById('prevBtn').addEventListener('click', prevQuestion);
   document.getElementById('submitBtn').addEventListener('click', submitQuiz);
   document.getElementById('deleteBtn').addEventListener('click', deleteAllAnswers);
 }
 
-// Render questions for current page
-function renderQuestions() {
+// Render current question
+function renderQuestion() {
   const questionsContainer = document.getElementById('quizQuestions');
   questionsContainer.innerHTML = '';
   
-  const currentQuestions = quizData[currentPage];
-  const startIndex = currentPage * 10;
-  
-  currentQuestions.forEach((question, index) => {
-    const questionNumber = startIndex + index;
-    const questionDiv = createQuestionElement(question, questionNumber);
-    questionsContainer.appendChild(questionDiv);
-  });
+  const questionData = quizData[currentQuestion];
+  const questionDiv = createQuestionElement(questionData, currentQuestion);
+  questionsContainer.appendChild(questionDiv);
 }
 
 // Create a question element
-function createQuestionElement(questionText, questionNumber) {
+function createQuestionElement(questionData, questionNumber) {
   const div = document.createElement('div');
   div.className = 'question-item';
   
   const questionTitle = document.createElement('div');
   questionTitle.className = 'question-text';
-  questionTitle.textContent = questionText;
+  questionTitle.innerHTML = `<strong>Question ${questionNumber + 1} of ${quizData.length}</strong><br>${questionData.question}`;
   
-  const ratingScale = document.createElement('div');
-  ratingScale.className = 'rating-scale';
-  
-  // Left label
-  const leftLabel = document.createElement('div');
-  leftLabel.className = 'rating-label left';
-  leftLabel.textContent = 'Not interested at all';
-  ratingScale.appendChild(leftLabel);
-  
-  // Rating options
   const optionsContainer = document.createElement('div');
-  optionsContainer.className = 'rating-options';
+  optionsContainer.className = 'question-options';
   
-  ratingOptions.forEach(option => {
+  questionData.options.forEach((option, index) => {
     const optionDiv = document.createElement('div');
-    optionDiv.className = 'rating-option';
+    optionDiv.className = 'option-item';
     
     const input = document.createElement('input');
     input.type = 'radio';
     input.name = `question_${questionNumber}`;
-    input.value = option.value;
-    input.id = `q${questionNumber}_${option.value}`;
+    input.value = index;
+    input.id = `q${questionNumber}_${index}`;
     
     // Check if this option was previously selected
-    if (answers[questionNumber] === option.value) {
+    if (answers[questionNumber] === index) {
       input.checked = true;
     }
     
     input.addEventListener('change', () => {
-      saveAnswer(questionNumber, option.value);
+      saveAnswer(questionNumber, index);
     });
     
     const label = document.createElement('label');
     label.htmlFor = input.id;
-    label.textContent = option.label;
+    label.textContent = option.text;
     
     optionDiv.appendChild(input);
     optionDiv.appendChild(label);
     optionsContainer.appendChild(optionDiv);
   });
   
-  ratingScale.appendChild(optionsContainer);
-  
-  // Right label
-  const rightLabel = document.createElement('div');
-  rightLabel.className = 'rating-label right';
-  rightLabel.textContent = 'Extremely interested';
-  ratingScale.appendChild(rightLabel);
-  
   div.appendChild(questionTitle);
-  div.appendChild(ratingScale);
+  div.appendChild(optionsContainer);
   
   return div;
 }
@@ -194,7 +169,7 @@ function loadAnswers() {
 
 // Update progress bar
 function updateProgress() {
-  const totalQuestions = 50;
+  const totalQuestions = quizData.length;
   const answeredQuestions = Object.keys(answers).length;
   const percentage = Math.round((answeredQuestions / totalQuestions) * 100);
   
@@ -212,14 +187,14 @@ function updateNavigation() {
   const submitBtn = document.getElementById('submitBtn');
   
   // Show/hide previous button
-  if (currentPage === 0) {
+  if (currentQuestion === 0) {
     prevBtn.style.display = 'none';
   } else {
     prevBtn.style.display = 'inline-block';
   }
   
   // Show/hide next and submit buttons
-  if (currentPage === quizData.length - 1) {
+  if (currentQuestion === quizData.length - 1) {
     nextBtn.style.display = 'none';
     submitBtn.style.display = 'inline-block';
   } else {
@@ -227,56 +202,37 @@ function updateNavigation() {
     submitBtn.style.display = 'none';
   }
   
-  // Enable/disable next button based on current page completion
-  const startIndex = currentPage * 10;
-  const endIndex = startIndex + 10;
-  let allAnswered = true;
-  
-  for (let i = startIndex; i < endIndex; i++) {
-    if (!answers.hasOwnProperty(i)) {
-      allAnswered = false;
-      break;
-    }
-  }
-  
-  // Allow navigation even if not all questions are answered (like the original quiz)
-  nextBtn.disabled = false;
-  submitBtn.disabled = false;
+  // Enable/disable next button based on current question answered
+  const isAnswered = answers.hasOwnProperty(currentQuestion);
+  nextBtn.disabled = !isAnswered;
+  submitBtn.disabled = !isAnswered;
 }
 
-// Update page indicator
-function updatePageIndicator() {
-  const pageIndicator = document.getElementById('pageIndicator');
-  pageIndicator.textContent = `Page ${currentPage + 1} of ${quizData.length}`;
-}
-
-// Next page
-function nextPage() {
-  if (currentPage < quizData.length - 1) {
-    currentPage++;
-    renderQuestions();
+// Next question
+function nextQuestion() {
+  if (currentQuestion < quizData.length - 1) {
+    currentQuestion++;
+    renderQuestion();
     updateProgress();
     updateNavigation();
-    updatePageIndicator();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
 
-// Previous page
-function prevPage() {
-  if (currentPage > 0) {
-    currentPage--;
-    renderQuestions();
+// Previous question
+function prevQuestion() {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    renderQuestion();
     updateProgress();
     updateNavigation();
-    updatePageIndicator();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
 
 // Submit quiz
 function submitQuiz() {
-  const totalQuestions = 50;
+  const totalQuestions = quizData.length;
   const answeredQuestions = Object.keys(answers).length;
   
   if (answeredQuestions < totalQuestions) {
@@ -299,7 +255,8 @@ function deleteAllAnswers() {
   if (confirm('Are you sure you want to delete all your answers? This action cannot be undone.')) {
     answers = {};
     localStorage.removeItem('careerQuizAnswers');
-    renderQuestions();
+    currentQuestion = 0;
+    renderQuestion();
     updateProgress();
     updateNavigation();
   }
