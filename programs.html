@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BCIT Programs - PathFinder</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/styles/app_home.css" />
+    <link rel="stylesheet" href="src/styles/programs.css" />
+    <!-- Web Components for shared navbar and footer layout -->
+    <script type="module" src="/src/components/app_site-navbar.js"></script>
+    <script type="module" src="/src/components/app_site-footer.js"></script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <site-navbar></site-navbar>
+
+    <!-- Main Programs Content -->
+    <div class="programs-container">
+      <div class="programs-header">
+        <h1>BCIT Programs</h1>
+        <p class="programs-intro">
+          Explore the full list of programs offered at BCIT (British Columbia Institute of Technology) organized by credential type. Click on any program to view detailed information on the official BCIT website.
+        </p>
+      </div>
+
+      <!-- Search and Filter -->
+      <div class="programs-controls">
+        <div class="search-box">
+          <input 
+            type="text" 
+            id="programSearch" 
+            placeholder="Search programs by name or area of study..." 
+            aria-label="Search programs"
+          />
+        </div>
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-filter="all">All Programs</button>
+          <button class="filter-btn" data-filter="certificate">Certificates</button>
+          <button class="filter-btn" data-filter="diploma">Diplomas</button>
+          <button class="filter-btn" data-filter="bachelor">Bachelor's Degrees</button>
+          <button class="filter-btn" data-filter="graduate">Graduate Programs</button>
+        </div>
+      </div>
+
+      <!-- Certificates Section -->
+      <section class="program-category-section" data-category="certificate">
+        <h2 class="category-title">📜 Certificate Programs</h2>
+        <p class="category-description">
+          Certificate programs typically range from a few months to one year and provide focused training in specific skills or areas.
+        </p>
+        
+        <div class="programs-grid">
+          <!-- Computing & IT Certificates -->
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/front-end-web-developer-associate-certificate-part-time-6530acert/" target="_blank" rel="noopener noreferrer">
+                Front-End Web Developer - Associate Certificate
+              </a>
+            </h3>
+            <p class="program-area">Computing & IT</p>
+            <p class="program-description">Learn HTML, CSS, JavaScript and modern web development practices.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/user-experience-design-associate-certificate-part-time-6532acert/" target="_blank" rel="noopener noreferrer">
+                User Experience (UX) Design - Associate Certificate
+              </a>
+            </h3>
+            <p class="program-area">Computing & IT</p>
+            <p class="program-description">Design user-centered digital experiences with UX principles and tools.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/applied-software-development-associate-certificate-part-time-6524acert/" target="_blank" rel="noopener noreferrer">
+                Applied Software Development - Associate Certificate
+              </a>
+            </h3>
+            <p class="program-area">Computing & IT</p>
+            <p class="program-description">Develop practical software development skills in multiple programming languages.</p>
+          </div>
+
+          <!-- Business Certificates -->
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/office-administrator-with-technology-program-oat-certificate-full-time-6998cert/" target="_blank" rel="noopener noreferrer">
+                Office Administrator with Technology (OAT) - Certificate
+              </a>
+            </h3>
+            <p class="program-area">Business</p>
+            <p class="program-description">Gain administrative and technology skills for modern office environments.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/nonprofit-management-associate-certificate-part-time-6310acert/" target="_blank" rel="noopener noreferrer">
+                Nonprofit Management - Associate Certificate
+              </a>
+            </h3>
+            <p class="program-area">Business</p>
+            <p class="program-description">Learn to manage and lead nonprofit organizations effectively.</p>
+          </div>
+
+          <!-- Design Certificates -->
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/graphic-design-associate-certificate-part-time-695acert/" target="_blank" rel="noopener noreferrer">
+                Graphic Design - Associate Certificate
+              </a>
+            </h3>
+            <p class="program-area">Design & Creative Arts</p>
+            <p class="program-description">Master visual communication and graphic design principles.</p>
+          </div>
+
+          <!-- Education & Social Services Certificates -->
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/early-childhood-education-assistant-certificate-full-time-1010cert/" target="_blank" rel="noopener noreferrer">
+                Early Childhood Education (ECE) Assistant - Certificate
+              </a>
+            </h3>
+            <p class="program-area">Education & Community Support</p>
+            <p class="program-description">Support young children's learning and development in childcare settings.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/social-services-worker-certificate-full-time-6860cert/" target="_blank" rel="noopener noreferrer">
+                Social Services Worker - Certificate
+              </a>
+            </h3>
+            <p class="program-area">Education & Community Support</p>
+            <p class="program-description">Provide support services to individuals and communities in need.</p>
+          </div>
+
+          <!-- Culinary Certificates -->
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/professional-cook-1-certificate-full-time-660acert/" target="_blank" rel="noopener noreferrer">
+                Professional Cook 1 - Certificate
+              </a>
+            </h3>
+            <p class="program-area">Culinary Arts</p>
+            <p class="program-description">Entry-level professional cooking training and certification.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/baking-and-pastry-arts-artisan-certificate-full-time-660bbcert/" target="_blank" rel="noopener noreferrer">
+                Baking & Pastry Arts - Artisan Certificate
+              </a>
+            </h3>
+            <p class="program-area">Culinary Arts</p>
+            <p class="program-description">Professional training in baking and pastry techniques.</p>
+          </div>
+
+          <!-- Aviation Certificates -->
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/airport-operations-associate-certificate-part-time-1070acert/" target="_blank" rel="noopener noreferrer">
+                Airport Operations - Associate Certificate
+              </a>
+            </h3>
+            <p class="program-area">Aviation & Transportation</p>
+            <p class="program-description">Learn airport operations, safety, and management principles.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Diplomas Section -->
+      <section class="program-category-section" data-category="diploma">
+        <h2 class="category-title">🎓 Diploma Programs</h2>
+        <p class="category-description">
+          Diploma programs typically take two years of full-time study and provide comprehensive education in your chosen field.
+        </p>
+        
+        <div class="programs-grid">
+          <!-- Computing & IT Diplomas -->
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/computer-systems-technology-diploma-full-time-5500dipma/" target="_blank" rel="noopener noreferrer">
+                Computer Systems Technology (CST) - Diploma
+              </a>
+            </h3>
+            <p class="program-area">Computing & IT</p>
+            <p class="program-description">Comprehensive software development and computer systems training.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/computer-information-technology-diploma-full-time-5510dipma/" target="_blank" rel="noopener noreferrer">
+                Computer Information Technology (CIT) - Diploma
+              </a>
+            </h3>
+            <p class="program-area">Computing & IT</p>
+            <p class="program-description">IT infrastructure, networking, and systems administration.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/new-media-design-and-web-development-diploma-full-time-6525dipma/" target="_blank" rel="noopener noreferrer">
+                New Media Design & Web Development - Diploma
+              </a>
+            </h3>
+            <p class="program-area">Computing & IT</p>
+            <p class="program-description">Combines design creativity with web development technical skills.</p>
+          </div>
+
+          <!-- Business Diplomas -->
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/business-administration-diploma-full-time-630adm/" target="_blank" rel="noopener noreferrer">
+                Business Administration - Diploma
+              </a>
+            </h3>
+            <p class="program-area">Business</p>
+            <p class="program-description">Foundational business knowledge in management, finance, and operations.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/marketing-management-diploma-full-time-6422dipma/" target="_blank" rel="noopener noreferrer">
+                Marketing Management - Diploma
+              </a>
+            </h3>
+            <p class="program-area">Business</p>
+            <p class="program-description">Strategic marketing, digital marketing, and brand management.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/financial-planning-diploma-full-time-6300dipma/" target="_blank" rel="noopener noreferrer">
+                Financial Planning - Diploma
+              </a>
+            </h3>
+            <p class="program-area">Business</p>
+            <p class="program-description">Prepare for a career in financial planning and wealth management.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/accounting-diploma-full-time-6100dipma/" target="_blank" rel="noopener noreferrer">
+                Accounting - Diploma
+              </a>
+            </h3>
+            <p class="program-area">Business</p>
+            <p class="program-description">Comprehensive accounting principles and financial reporting.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/human-resource-management-diploma-full-time-6410dipma/" target="_blank" rel="noopener noreferrer">
+                Human Resource Management - Diploma
+              </a>
+            </h3>
+            <p class="program-area">Business</p>
+            <p class="program-description">HR strategy, recruitment, employee relations, and organizational development.</p>
+          </div>
+
+          <!-- Design & Media Diplomas -->
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/broadcast-and-online-journalism-diploma-full-time-6405dipma/" target="_blank" rel="noopener noreferrer">
+                Broadcast & Online Journalism - Diploma
+              </a>
+            </h3>
+            <p class="program-area">Design & Creative Arts</p>
+            <p class="program-description">Multi-platform journalism, storytelling, and media production.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/digital-design-and-development-diploma-full-time-6535dipma/" target="_blank" rel="noopener noreferrer">
+                Digital Design & Development - Diploma
+              </a>
+            </h3>
+            <p class="program-area">Design & Creative Arts</p>
+            <p class="program-description">Interactive media design and digital product development.</p>
+          </div>
+
+          <!-- Culinary Diplomas -->
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/culinary-arts-diploma-full-time-660adipma/" target="_blank" rel="noopener noreferrer">
+                Culinary Arts - Diploma
+              </a>
+            </h3>
+            <p class="program-area">Culinary Arts</p>
+            <p class="program-description">Professional cooking, menu planning, and kitchen management.</p>
+          </div>
+
+          <!-- Aviation Diplomas -->
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/aviation-management-and-operations-diploma-full-time-1175dipma/" target="_blank" rel="noopener noreferrer">
+                Aviation Management & Operations - Diploma
+              </a>
+            </h3>
+            <p class="program-area">Aviation & Transportation</p>
+            <p class="program-description">Aviation industry operations, management, and safety systems.</p>
+          </div>
+
+          <!-- Healthcare Diplomas -->
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/medical-laboratory-assistant-diploma-full-time-6750dipma/" target="_blank" rel="noopener noreferrer">
+                Medical Laboratory Assistant - Diploma
+              </a>
+            </h3>
+            <p class="program-area">Health Sciences</p>
+            <p class="program-description">Laboratory testing, specimen processing, and medical lab procedures.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/health-information-management-diploma-full-time-6730dipma/" target="_blank" rel="noopener noreferrer">
+                Health Information Management - Diploma
+              </a>
+            </h3>
+            <p class="program-area">Health Sciences</p>
+            <p class="program-description">Healthcare data management, coding, and medical records administration.</p>
+          </div>
+
+          <!-- Engineering & Trades Diplomas -->
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/architectural-and-building-technology-diploma-full-time-0020dipma/" target="_blank" rel="noopener noreferrer">
+                Architectural & Building Technology - Diploma
+              </a>
+            </h3>
+            <p class="program-area">Engineering & Construction</p>
+            <p class="program-description">Building design, construction technology, and architectural systems.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/civil-engineering-technology-diploma-full-time-5410dipma/" target="_blank" rel="noopener noreferrer">
+                Civil Engineering Technology - Diploma
+              </a>
+            </h3>
+            <p class="program-area">Engineering & Construction</p>
+            <p class="program-description">Infrastructure design, surveying, and civil engineering projects.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/electrical-and-computer-engineering-technology-power-and-control-diploma-full-time-5750dipma/" target="_blank" rel="noopener noreferrer">
+                Electrical & Computer Engineering Technology - Diploma
+              </a>
+            </h3>
+            <p class="program-area">Engineering & Construction</p>
+            <p class="program-description">Electrical systems, power distribution, and control systems.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bachelor's Degrees Section -->
+      <section class="program-category-section" data-category="bachelor">
+        <h2 class="category-title">🎯 Bachelor's Degree Programs</h2>
+        <p class="category-description">
+          Bachelor's degree programs typically require four years of full-time study and provide in-depth knowledge with both theoretical and applied learning.
+        </p>
+        
+        <div class="programs-grid">
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/bachelor-of-technology-computer-systems-full-time-6985btech/" target="_blank" rel="noopener noreferrer">
+                Bachelor of Technology - Computer Systems
+              </a>
+            </h3>
+            <p class="program-area">Computing & IT</p>
+            <p class="program-description">Advanced computer systems, software architecture, and technology leadership.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/bachelor-of-digital-arts-media-and-design-full-time-8200bbed/" target="_blank" rel="noopener noreferrer">
+                Bachelor of Digital Arts, Media & Design
+              </a>
+            </h3>
+            <p class="program-area">Design & Creative Arts</p>
+            <p class="program-description">Digital media creation, interactive design, and creative technology.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/bachelor-of-business-administration-full-time-6350bbus/" target="_blank" rel="noopener noreferrer">
+                Bachelor of Business Administration (BBA)
+              </a>
+            </h3>
+            <p class="program-area">Business</p>
+            <p class="program-description">Comprehensive business education with specialization options.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/bachelor-of-engineering-electrical-full-time-5750basc/" target="_blank" rel="noopener noreferrer">
+                Bachelor of Engineering - Electrical
+              </a>
+            </h3>
+            <p class="program-area">Engineering & Construction</p>
+            <p class="program-description">Professional engineering education in electrical systems and design.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/bachelor-of-science-in-nursing-full-time-6950bscn/" target="_blank" rel="noopener noreferrer">
+                Bachelor of Science in Nursing (BScN)
+              </a>
+            </h3>
+            <p class="program-area">Health Sciences</p>
+            <p class="program-description">Comprehensive nursing education for registered nurse licensure.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/bachelor-of-hospitality-management-full-time-6600bhm/" target="_blank" rel="noopener noreferrer">
+                Bachelor of Hospitality Management
+              </a>
+            </h3>
+            <p class="program-area">Business</p>
+            <p class="program-description">Hotel and tourism management with international perspective.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Graduate Programs Section -->
+      <section class="program-category-section" data-category="graduate">
+        <h2 class="category-title">🎓 Graduate & Master's Programs</h2>
+        <p class="category-description">
+          Graduate programs for advanced study and professional development, typically requiring a bachelor's degree for admission.
+        </p>
+        
+        <div class="programs-grid">
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/master-of-engineering-building-science-full-time-8810meng/" target="_blank" rel="noopener noreferrer">
+                Master of Engineering - Building Science
+              </a>
+            </h3>
+            <p class="program-area">Engineering & Construction</p>
+            <p class="program-description">Advanced building performance, sustainability, and envelope systems.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/master-of-digital-media-full-time-8500mdm/" target="_blank" rel="noopener noreferrer">
+                Master of Digital Media (MDM)
+              </a>
+            </h3>
+            <p class="program-area">Design & Creative Arts</p>
+            <p class="program-description">Advanced digital media innovation and interdisciplinary collaboration.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/master-of-applied-science-full-time-8950masc/" target="_blank" rel="noopener noreferrer">
+                Master of Applied Science (MASc)
+              </a>
+            </h3>
+            <p class="program-area">Engineering & Construction</p>
+            <p class="program-description">Research-based graduate program in applied sciences and engineering.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/master-of-engineering-full-time-8900meng/" target="_blank" rel="noopener noreferrer">
+                Master of Engineering (MEng)
+              </a>
+            </h3>
+            <p class="program-area">Engineering & Construction</p>
+            <p class="program-description">Advanced engineering knowledge and professional practice.</p>
+          </div>
+
+          <div class="program-card">
+            <h3 class="program-name">
+              <a href="https://www.bcit.ca/programs/master-of-business-administration-full-time-6340mba/" target="_blank" rel="noopener noreferrer">
+                Master of Business Administration (MBA)
+              </a>
+            </h3>
+            <p class="program-area">Business</p>
+            <p class="program-description">Executive-level business education and strategic leadership.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Additional Resources Section -->
+      <section class="resources-section">
+        <h2>Additional Resources</h2>
+        <div class="resources-grid">
+          <div class="resource-card">
+            <h3>📚 Browse All Programs</h3>
+            <p>Explore the complete catalog of BCIT programs by area of study.</p>
+            <a href="https://www.bcit.ca/study/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Visit BCIT Study</a>
+          </div>
+
+          <div class="resource-card">
+            <h3>💡 Program Finder</h3>
+            <p>Use BCIT's program finder tool to discover programs that match your interests.</p>
+            <a href="https://www.bcit.ca/programs/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Program Finder</a>
+          </div>
+
+          <div class="resource-card">
+            <h3>📝 How to Apply</h3>
+            <p>Learn about admission requirements and the application process.</p>
+            <a href="https://www.bcit.ca/admission/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Admission Info</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <a href="quiz.html" class="btn btn-secondary">Take Career Quiz</a>
+        <a href="index.html" class="btn btn-primary">Back to Home</a>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <site-footer></site-footer>
+
+    <!-- Programs JavaScript -->
+    <script type="module" src="/src/programs.js"></script>
+  </body>
+</html>
