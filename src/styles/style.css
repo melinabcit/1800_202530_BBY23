@@ -655,7 +655,7 @@ h4 {
 }
 
 .icon-item img {
-  width: 60px !important;
+  width: 60px;
   height: auto;
   transition: transform 0.3s ease;
 }
@@ -726,7 +726,7 @@ h4 {
   }
   
   .icon-item img {
-    width: 40px !important;
+    width: 40px;
   }
   
   .icon-caption {
