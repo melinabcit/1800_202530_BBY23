@@ -29,8 +29,7 @@
   font-size: 18px;
   line-height: 1.6;
   color: rgba(255, 255, 255, 0.95);
-  margin-bottom: 15px;
-  margin: 0;
+  margin: 0 0 15px 0;
 }
 
 .quiz-info {
@@ -266,6 +265,7 @@
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
+  opacity: 0.7;
 }
 
 /* Page Indicator */
