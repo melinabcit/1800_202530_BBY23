@@ -3,6 +3,116 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>PathFinder</title>
-    <link rel="stylesheet" href="styles/login.css" />
+    <title>Login - PathFinder</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="src/styles/app_home.css" />
+    <link rel="stylesheet" href="src/styles/style.css" />
+    <!-- Web Components for shared navbar and footer layout -->
+    <script type="module" src="/src/components/app_site-navbar.js"></script>
+    <script type="module" src="/src/components/app_site-footer.js"></script>
   </head>
+  <body>
+    <!-- our own navbar goes here -->
+    <site-navbar></site-navbar>
+
+    <!-- Main Login/Signup Content -->
+    <div class="container" style="max-width: 500px; margin: 3rem auto; padding: 2rem;">
+      <!-- Alert for errors -->
+      <div id="authAlert" class="d-none" role="alert" style="color: #dc3545; background: #f8d7da; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; text-align: center;">
+      </div>
+
+      <!-- Login View -->
+      <div id="loginView">
+        <h1 style="text-align: center; margin-bottom: 2rem; color: #4a90e2;">Welcome Back</h1>
+        <form id="loginForm">
+          <div style="margin-bottom: 1rem;">
+            <label for="loginEmail" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email</label>
+            <input
+              type="email"
+              id="loginEmail"
+              placeholder="Enter your email"
+              required
+              style="width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem;"
+            />
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label for="loginPassword" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Password</label>
+            <input
+              type="password"
+              id="loginPassword"
+              placeholder="Enter your password"
+              required
+              style="width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem;"
+            />
+          </div>
+          <button
+            type="submit"
+            style="width: 100%; padding: 0.75rem; background: linear-gradient(135deg, #4a90e2 0%, #7b68ee 100%); color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer;"
+          >
+            Log In
+          </button>
+        </form>
+        <p style="text-align: center; margin-top: 1.5rem;">
+          Don't have an account?
+          <a href="#" id="toSignup" style="color: #4a90e2; font-weight: 600;">Sign up</a>
+        </p>
+      </div>
+
+      <!-- Signup View (hidden by default) -->
+      <div id="signupView" class="d-none">
+        <h1 style="text-align: center; margin-bottom: 2rem; color: #4a90e2;">Create Account</h1>
+        <form id="signupForm">
+          <div style="margin-bottom: 1rem;">
+            <label for="signupName" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Name</label>
+            <input
+              type="text"
+              id="signupName"
+              placeholder="Enter your name"
+              required
+              style="width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem;"
+            />
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <label for="signupEmail" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Email</label>
+            <input
+              type="email"
+              id="signupEmail"
+              placeholder="Enter your email"
+              required
+              style="width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem;"
+            />
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label for="signupPassword" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Password</label>
+            <input
+              type="password"
+              id="signupPassword"
+              placeholder="Create a password"
+              required
+              style="width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 8px; font-size: 1rem;"
+            />
+          </div>
+          <button
+            type="submit"
+            style="width: 100%; padding: 0.75rem; background: linear-gradient(135deg, #4a90e2 0%, #7b68ee 100%); color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer;"
+          >
+            Sign Up
+          </button>
+        </form>
+        <p style="text-align: center; margin-top: 1.5rem;">
+          Already have an account?
+          <a href="#" id="toLogin" style="color: #4a90e2; font-weight: 600;">Log in</a>
+        </p>
+      </div>
+    </div>
+
+    <!-- our own footer goes here -->
+    <site-footer></site-footer>
+
+    <!-- Login/Signup JavaScript -->
+    <script type="module" src="/src/loginSignup.js"></script>
+  </body>
+</html>
