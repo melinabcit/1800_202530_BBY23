@@ -468,6 +468,12 @@ async function initResults() {
 
 // Save quiz results to Firebase (with FIFO queue - keep only 3 most recent)
 async function saveResultsToFirebase(categoryScores, topCategories) {
+  // Check if Firebase auth is available
+  if (!auth) {
+    console.log("Firebase auth not available. Results not saved to cloud.");
+    return;
+  }
+  
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       try {
